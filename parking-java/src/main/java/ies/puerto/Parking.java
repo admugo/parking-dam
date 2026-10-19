@@ -18,7 +18,7 @@ public class Parking {
     static float importeTotalCalculado = 0f;
 
     /**
-     * Coordina la ejecucion del programa de aparcamiento.
+     * Funcion que coordina la ejecucion del programa de aparcamiento.
      *
      * @param args argumentos de la linea de comandos
      */
@@ -38,7 +38,7 @@ public class Parking {
     }
 
     /**
-     * Muestra las opciones disponibles del menu.
+     * Funcion que muestra las opciones disponibles del menu.
      */
     static void mostrarMenu(){
         int opcion = 0;
@@ -63,7 +63,12 @@ public class Parking {
                     totalHorasRegistradas += horasOperacion;
                     break;
                 case 2:
-                    // Calcular tarifa de estacionamiento
+                    int horasTarifa = leerEnteroPositivo(teclado, "Horas para calcular la tarifa: ");
+                    float importe = calcularTarifa(horasTarifa, tarifaHora);
+                    totalCalculosTarifa++;
+                    importeTotalCalculado += importe;
+                    System.out.println("Importe: " + importe + " euros");
+                    System.out.println(" ");
                     break;
                 case 3:
                     // Mostrar resumen del día
@@ -83,11 +88,11 @@ public class Parking {
     }
 
     /**
-     * Funcion que pide y valida un entero positivo
+     * Funcion que pide y valida un entero positivo.
      *
      * @param teclado Scanner para obtener datos del usuario
      * @param mensaje String que se muestra al solicitar el dato
-     * @return numero entero positivo validado
+     * @return int numero entero positivo validado
      */
     public static int leerEnteroPositivo(Scanner teclado, String mensaje){
         int numero = 0;
@@ -103,11 +108,11 @@ public class Parking {
     }
 
     /**
-     * Registra una cantidad conocida de vehiculos pidiendo su matricula y horas estacionadas.
+     * Funcion que registra una cantidad conocida de vehiculos pidiendo su matricula y horas estacionadas.
      *
      * @param teclado Scanner para obtener datos del usuario
      * @param cantidad int vehiculos a registrar
-     * @return total de horas registradas en esta operacion
+     * @return int total de horas registradas en esta operacion
      */
     public static int registrarVehiculos(Scanner teclado, int cantidad) {
         int horasTotalesOperacion = 0;
@@ -126,6 +131,17 @@ public class Parking {
 
         System.out.println("Vehiculos registrados en esta operacion: " + cantidad);
         return horasTotalesOperacion;
+    }
+
+    /**
+     * Funcion que calcula el importe total de un estacionamiento.
+     *
+     * @param horas int de estacionamiento
+     * @param tarifaHora float precio por cada hora de estacionamiento
+     * @return float importe total calculado
+     */
+    public static float calcularTarifa(int horas, float tarifaHora) {
+        return horas * tarifaHora;
     }
 
 }
