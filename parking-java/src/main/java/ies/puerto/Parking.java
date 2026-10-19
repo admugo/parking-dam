@@ -16,6 +16,7 @@ public class Parking {
     static int totalHorasRegistradas = 0;
     static int totalCalculosTarifa = 0;
     static float importeTotalCalculado = 0f;
+    static String nombre = "";
 
     /**
      * Funcion que coordina la ejecucion del programa de aparcamiento.
@@ -29,7 +30,7 @@ public class Parking {
         System.out.println(" ");
 
         System.out.print("Nombre de usuario: ");
-        String nombre = teclado.nextLine();
+        nombre = teclado.nextLine();
         System.out.println(" ");
 
         mostrarMenu();
@@ -57,7 +58,7 @@ public class Parking {
 
             switch (opcion) {
                 case 1:
-                    int cantidad = leerEnteroPositivo(teclado, "Cuantos vehiculos quieres registrar? ");
+                    int cantidad = leerEnteroPositivo(teclado, "¿Cuantos vehiculos quieres registrar? ");
                     int horasOperacion = registrarVehiculos(teclado, cantidad);
                     totalVehiculos += cantidad;
                     totalHorasRegistradas += horasOperacion;
@@ -71,7 +72,7 @@ public class Parking {
                     System.out.println(" ");
                     break;
                 case 3:
-                    // Mostrar resumen del día
+                    mostrarResumen(nombre, totalVehiculos, totalHorasRegistradas, totalCalculosTarifa, importeTotalCalculado);
                     break;
                 case 4:
                     System.out.println("Gracias por utilizar PARKING DAM-PRO");
@@ -144,4 +145,22 @@ public class Parking {
         return horas * tarifaHora;
     }
 
+    /**
+     * Funcion que muestra el resumen de la sesion con los datos acumulados.
+     *
+     * @param nombre String nombre del usuario del parking
+     * @param totalVehiculos int total de vehiculos registrados
+     * @param totalHorasRegistradas int total de horas registradas
+     * @param totalCalculosTarifa int cantidad de calculos de tarifa realizados
+     * @param importeTotalCalculado float importe total acumulado
+     */
+    public static void mostrarResumen(String nombre, int totalVehiculos, int totalHorasRegistradas, int totalCalculosTarifa, float importeTotalCalculado) {
+        System.out.println("=== RESUMEN ===");
+        System.out.println("Usuario: " + nombre);
+        System.out.println("Vehiculos registrados: " + totalVehiculos);
+        System.out.println("Horas registradas: " + totalHorasRegistradas);
+        System.out.println("Calculos de tarifas: " + totalCalculosTarifa);
+        System.out.println("Importe total calculado: " + importeTotalCalculado + " euros");
+        System.out.println("");
+    }
 }
